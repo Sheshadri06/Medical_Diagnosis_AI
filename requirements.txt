@@ -1,7 +1,4 @@
 streamlit
 numpy
-sklearn
-tensorflow
-matplotlib
-pickle
 streamlit_option_menu
+scikit-learn
