@@ -86,7 +86,7 @@ color = disease_colors.get(selected, "#000000")  # Default to black if not found
 
 # Display a styled title for the selected disease
 st.markdown(
-    f"<h1 style='color: {color}; font-family: Arial; font-weight: bold; text-align: center; background-color: #f0f0f0; padding: 10px; border-radius: 10px;'>{selected}</h1>",
+    f"<h1 style='color: {color}; font-family: Arial; font-weight: bold; text-align: center; background-color: blackcolor; padding: 10px; border-radius: 10px;'>{selected}</h1>",
     unsafe_allow_html=True
 )
 def display_input(label, tooltip, key, type="text"):
