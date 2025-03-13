@@ -33,8 +33,8 @@ def set_bg(image_file):
     st.markdown(page_bg_img, unsafe_allow_html=True)
 
 # Call the function with your image
-set_bg("https://files.oaiusercontent.com/file-4AhuA7vuyaMMEwUtbV5x3r?se=2025-03-13T12%3A53%3A08Z&sp=r&sv=2024-08-04&sr=b&rscc=max-age%3D604800%2C%20immutable%2C%20private&rscd=attachment%3B%20filename%3D5c8af0e2-d397-4b6f-8739-a43ced2d1c0c.webp&sig=tKwaxXvN3NzJ8lLWBI%2BULLXR1PiVvJqP6rsDSZAgaUM%3D")
-    
+set_bg("https://static.vecteezy.com/system/resources/previews/002/082/178/non_2x/medical-healthcare-diagnostics-disease-concept-design-tech-background-vector.jpg")
+
 # Load the saved models
 
 models = {}
@@ -98,7 +98,7 @@ def display_input(label, tooltip, key, type="text"):
 # Diabetes Prediction Page
 if selected == 'Diabetes Prediction':
     #st.title('Diabetes')
-    st.write("Enter the following details to predict diabetes:")
+    st.write("Enter the following details to predict Diabetes:")
 
     Pregnancies = display_input('Number of Pregnancies', 'Enter number of times pregnant', 'Pregnancies', 'number')
     Glucose = display_input('Glucose Level', 'Enter glucose level', 'Glucose', 'number')
@@ -115,15 +115,15 @@ if selected == 'Diabetes Prediction':
         #diab_diagnosis = 'The person is diabetic' if diab_prediction[0] == 1 else 'The person is not diabetic'
         #st.success(diab_diagnosis)
         if diab_prediction[0] == 1:
-            st.markdown(f"<h3 style='color: red;'>The person is diabetic</h3>", unsafe_allow_html=True)
+            st.markdown(f"<h3 style='color: red;'>The person is Diabetic</h3>", unsafe_allow_html=True)
         else:
-            st.markdown(f"<h3 style='color: yellow;'>The person is not diabetic</h3>", unsafe_allow_html=True)
+            st.markdown(f"<h3 style='color: yellow;'>The person is not Diabetic</h3>", unsafe_allow_html=True)
 
 
 # Heart Disease Prediction Page
 if selected == 'Heart Disease Prediction':
     #st.title('Heart Disease')
-    st.write("Enter the following details to predict heart disease:")
+    st.write("Enter the following details to predict Heart Disease:")
 
     age = display_input('Age', 'Enter age of the person', 'age', 'number')
     sex = display_input('Sex (1 = male; 0 = female)', 'Enter sex of the person', 'sex', 'number')
@@ -142,13 +142,18 @@ if selected == 'Heart Disease Prediction':
     heart_diagnosis = ''
     if st.button('Heart Disease Test Result'):
         heart_prediction = models['heart_disease'].predict([[age, sex, cp, trestbps, chol, fbs, restecg, thalach, exang, oldpeak, slope, ca, thal]])
-        heart_diagnosis = 'The person has heart disease' if heart_prediction[0] == 1 else 'The person does not have heart disease'
-        st.success(heart_diagnosis)
+        
+        if heart_prediction[0] == 1:
+            st.markdown(f"<h3 style='color: red;'>The person has Heart Disease</h3>", unsafe_allow_html=True)
+        else:
+            st.markdown(f"<h3 style='color: yellow;'>The person does not have Heart Disease</h3>", unsafe_allow_html=True)
+
+   
 
 # Parkinson's Prediction Page
 if selected == "Parkinsons Prediction":
     #st.title("Parkinson's Disease")
-    st.write("Enter the following details to predict Parkinson's disease:")
+    st.write("Enter the following details to predict Parkinson's Disease:")
 
     fo = display_input('MDVP:Fo(Hz)', 'Enter MDVP:Fo(Hz) value', 'fo', 'number')
     fhi = display_input('MDVP:Fhi(Hz)', 'Enter MDVP:Fhi(Hz) value', 'fhi', 'number')
@@ -176,13 +181,17 @@ if selected == "Parkinsons Prediction":
     parkinsons_diagnosis = ''
     if st.button("Parkinson's Test Result"):
         parkinsons_prediction = models['parkinsons'].predict([[fo, fhi, flo, Jitter_percent, Jitter_Abs, RAP, PPQ, DDP, Shimmer, Shimmer_dB, APQ3, APQ5, APQ, DDA, NHR, HNR, RPDE, DFA, spread1, spread2, D2, PPE]])
-        parkinsons_diagnosis = "The person has Parkinson's disease" if parkinsons_prediction[0] == 1 else "The person does not have Parkinson's disease"
-        st.success(parkinsons_diagnosis)
+        
+        if parkinsons_prediction[0] == 1:
+            st.markdown(f"<h3 style='color: red;'>The person has Parkinson's Disease</h3>", unsafe_allow_html=True)
+        else:
+            st.markdown(f"<h3 style='color: yellow;'>The person does not have  Parkinson's Disease</h3>", unsafe_allow_html=True)
+
 
 # Lung Cancer Prediction Page
 if selected == "Lung Cancer Prediction":
     #st.title("Lung Cancer")
-    st.write("Enter the following details to predict lung cancer:")
+    st.write("Enter the following details to predict Lung Cancer:")
 
     GENDER = display_input('Gender (1 = Male; 0 = Female)', 'Enter gender of the person', 'GENDER', 'number')
     AGE = display_input('Age', 'Enter age of the person', 'AGE', 'number')
@@ -203,13 +212,19 @@ if selected == "Lung Cancer Prediction":
     lungs_diagnosis = ''
     if st.button("Lung Cancer Test Result"):
         lungs_prediction = models['lung_cancer'].predict([[GENDER, AGE, SMOKING, YELLOW_FINGERS, ANXIETY, PEER_PRESSURE, CHRONIC_DISEASE, FATIGUE, ALLERGY, WHEEZING, ALCOHOL_CONSUMING, COUGHING, SHORTNESS_OF_BREATH, SWALLOWING_DIFFICULTY, CHEST_PAIN]])
-        lungs_diagnosis = "The person has lung cancer disease" if lungs_prediction[0] == 1 else "The person does not have lung cancer disease"
-        st.success(lungs_diagnosis)
+        
+        if lungs_prediction[0] == 1:
+            st.markdown(f"<h3 style='color: red;'>The person has Lung Cancer Disease</h3>", unsafe_allow_html=True)
+        else:
+            st.markdown(f"<h3 style='color: yellow;'>The person does not have Lung Cancer Disease</h3>", unsafe_allow_html=True)
+
+        
+        
 
 # Hypo-Thyroid Prediction Page
 if selected == "Hypo-Thyroid Prediction":
     #st.title("Hypo-Thyroid")
-    st.write("Enter the following details to predict hypo-thyroid disease:")
+    st.write("Enter the following details to predict Hypo-thyroid Disease:")
 
     age = display_input('Age', 'Enter age of the person', 'age', 'number')
     sex = display_input('Sex (1 = Male; 0 = Female)', 'Enter sex of the person', 'sex', 'number')
@@ -222,5 +237,9 @@ if selected == "Hypo-Thyroid Prediction":
     thyroid_diagnosis = ''
     if st.button("Thyroid Test Result"):
         thyroid_prediction = models['thyroid'].predict([[age, sex, on_thyroxine, tsh, t3_measured, t3, tt4]])
-        thyroid_diagnosis = "The person has Hypo-Thyroid disease" if thyroid_prediction[0] == 1 else "The person does not have Hypo-Thyroid disease"
-        st.success(thyroid_diagnosis)
+    
+        if thyroid_prediction[0] == 1:
+            st.markdown(f"<h3 style='color: red;'>The person has Hypo-Thyroid Disease</h3>", unsafe_allow_html=True)
+        else:
+            st.markdown(f"<h3 style='color: yellow;'>The person does not have Hypo-Thyroid Disease</h3>", unsafe_allow_html=True)
+
