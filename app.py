@@ -33,7 +33,7 @@ def set_bg(image_file):
     st.markdown(page_bg_img, unsafe_allow_html=True)
 
 # Call the function with your image
-set_bg("https://static.vecteezy.com/system/resources/previews/002/082/178/non_2x/medical-healthcare-diagnostics-disease-concept-design-tech-background-vector.jpg")
+set_bg("https://emag.medicalexpo.com/wp-content/uploads/sites/9/AI-Medical-Imaging-iStock.jpg.png")
 
 # Load the saved models
 
