@@ -33,8 +33,7 @@ def set_bg(image_file):
     st.markdown(page_bg_img, unsafe_allow_html=True)
 
 # Call the function with your image
-set_bg("https://files.oaiusercontent.com/file-QYMFpaAFof45fNuwk5K2CQ?se=2025-03-07T05%3A41%3A16Z&sp=r&sv=2024-08-04&sr=b&rscc=max-age%3D604800%2C%20immutable%2C%20private&rscd=attachment%3B%20filename%3D33726e90-256e-4d6b-814b-1616cc9967c1.webp&sig=a5ahtiKAjKzYng89Vi/GVWCWeqYalcOFVFigwagJtLc%3D")  # Replace with your image file or URL
-
+set_bg("https://files.oaiusercontent.com/file-4AhuA7vuyaMMEwUtbV5x3r?se=2025-03-13T12%3A53%3A08Z&sp=r&sv=2024-08-04&sr=b&rscc=max-age%3D604800%2C%20immutable%2C%20private&rscd=attachment%3B%20filename%3D5c8af0e2-d397-4b6f-8739-a43ced2d1c0c.webp&sig=tKwaxXvN3NzJ8lLWBI%2BULLXR1PiVvJqP6rsDSZAgaUM%3D")
     
 # Load the saved models
 
