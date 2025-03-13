@@ -243,3 +243,5 @@ if selected == "Hypo-Thyroid Prediction":
         else:
             st.markdown(f"<h3 style='color: yellow;'>The person does not have Hypo-Thyroid Disease</h3>", unsafe_allow_html=True)
 
+
+
