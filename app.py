@@ -33,17 +33,26 @@ def set_bg(image_file):
     st.markdown(page_bg_img, unsafe_allow_html=True)
 
 # Call the function with your image
-set_bg("https://assets.hyscaler.com/wp-content/uploads-webpc/uploads/2023/11/ai-healthcare.png.webp")  # Replace with your image file or URL
+set_bg("https://files.oaiusercontent.com/file-QYMFpaAFof45fNuwk5K2CQ?se=2025-03-07T05%3A41%3A16Z&sp=r&sv=2024-08-04&sr=b&rscc=max-age%3D604800%2C%20immutable%2C%20private&rscd=attachment%3B%20filename%3D33726e90-256e-4d6b-814b-1616cc9967c1.webp&sig=a5ahtiKAjKzYng89Vi/GVWCWeqYalcOFVFigwagJtLc%3D")  # Replace with your image file or URL
 
     
 # Load the saved models
-models = {
-    'diabetes': pickle.load(open('diabetes_model.sav', 'rb')),
-    'heart_disease': pickle.load(open('heart_disease_model.sav', 'rb')),
-    'parkinsons': pickle.load(open('parkinsons_model.sav', 'rb')),
-    'lung_cancer': pickle.load(open('lungs_disease_model.sav', 'rb')),
-    'thyroid': pickle.load(open('Thyroid_model.sav', 'rb'))
-}
+
+models = {}
+try:
+    models['diabetes'] = pickle.load(open('diabetes_model.sav', 'rb'))
+    models['heart_disease'] = pickle.load(open('heart_disease_model.sav', 'rb'))
+    models['parkinsons'] = pickle.load(open('parkinsons_model.sav', 'rb'))
+    models['lung_cancer'] = pickle.load(open('lungs_disease_model.sav', 'rb'))
+    models['thyroid'] = pickle.load(open('Thyroid_model.sav', 'rb'))
+except FileNotFoundError as e:
+    st.error(f"Model file not found: {e}")
+    st.stop()
+except Exception as e:
+    st.error(f"Error loading models: {e}")
+    st.stop()
+
+
 
 # Create a dropdown menu for disease prediction
 selected = st.selectbox(
@@ -54,7 +63,33 @@ selected = st.selectbox(
      'Lung Cancer Prediction',
      'Hypo-Thyroid Prediction']
 )
+# Map selection to model key
+disease_map = {
+    'Diabetes Prediction': 'diabetes',
+    'Heart Disease Prediction': 'heart_disease',
+    'Parkinsons Prediction': 'parkinsons',
+    'Lung Cancer Prediction': 'lung_cancer',
+    'Hypo-Thyroid Prediction': 'thyroid'
+}
 
+selected_model_key = disease_map.get(selected)
+
+disease_colors = {
+    'Diabetes Prediction': '#D32F2F',  # Dark Red
+    'Heart Disease Prediction': '#C2185B',  # Deep Pink
+    'Parkinsons Prediction': '#7B1FA2',  # Dark Purple
+    'Lung Cancer Prediction': '#00796B',  # Dark Teal
+    'Hypo-Thyroid Prediction': '#303F9F'  # Dark Blue
+}
+
+selected_model_key = disease_map.get(selected)
+color = disease_colors.get(selected, "#000000")  # Default to black if not found
+
+# Display a styled title for the selected disease
+st.markdown(
+    f"<h1 style='color: {color}; font-family: Arial; font-weight: bold; text-align: center; background-color: #f0f0f0; padding: 10px; border-radius: 10px;'>{selected}</h1>",
+    unsafe_allow_html=True
+)
 def display_input(label, tooltip, key, type="text"):
     if type == "text":
         return st.text_input(label, key=key, help=tooltip)
@@ -63,7 +98,7 @@ def display_input(label, tooltip, key, type="text"):
 
 # Diabetes Prediction Page
 if selected == 'Diabetes Prediction':
-    st.title('Diabetes')
+    #st.title('Diabetes')
     st.write("Enter the following details to predict diabetes:")
 
     Pregnancies = display_input('Number of Pregnancies', 'Enter number of times pregnant', 'Pregnancies', 'number')
@@ -78,12 +113,17 @@ if selected == 'Diabetes Prediction':
     diab_diagnosis = ''
     if st.button('Diabetes Test Result'):
         diab_prediction = models['diabetes'].predict([[Pregnancies, Glucose, BloodPressure, SkinThickness, Insulin, BMI, DiabetesPedigreeFunction, Age]])
-        diab_diagnosis = 'The person is diabetic' if diab_prediction[0] == 1 else 'The person is not diabetic'
-        st.success(diab_diagnosis)
+        #diab_diagnosis = 'The person is diabetic' if diab_prediction[0] == 1 else 'The person is not diabetic'
+        #st.success(diab_diagnosis)
+        if diab_prediction[0] == 1:
+            st.markdown(f"<h3 style='color: red;'>The person is diabetic</h3>", unsafe_allow_html=True)
+        else:
+            st.markdown(f"<h3 style='color: yellow;'>The person is not diabetic</h3>", unsafe_allow_html=True)
+
 
 # Heart Disease Prediction Page
 if selected == 'Heart Disease Prediction':
-    st.title('Heart Disease')
+    #st.title('Heart Disease')
     st.write("Enter the following details to predict heart disease:")
 
     age = display_input('Age', 'Enter age of the person', 'age', 'number')
@@ -108,7 +148,7 @@ if selected == 'Heart Disease Prediction':
 
 # Parkinson's Prediction Page
 if selected == "Parkinsons Prediction":
-    st.title("Parkinson's Disease")
+    #st.title("Parkinson's Disease")
     st.write("Enter the following details to predict Parkinson's disease:")
 
     fo = display_input('MDVP:Fo(Hz)', 'Enter MDVP:Fo(Hz) value', 'fo', 'number')
@@ -142,7 +182,7 @@ if selected == "Parkinsons Prediction":
 
 # Lung Cancer Prediction Page
 if selected == "Lung Cancer Prediction":
-    st.title("Lung Cancer")
+    #st.title("Lung Cancer")
     st.write("Enter the following details to predict lung cancer:")
 
     GENDER = display_input('Gender (1 = Male; 0 = Female)', 'Enter gender of the person', 'GENDER', 'number')
@@ -169,7 +209,7 @@ if selected == "Lung Cancer Prediction":
 
 # Hypo-Thyroid Prediction Page
 if selected == "Hypo-Thyroid Prediction":
-    st.title("Hypo-Thyroid")
+    #st.title("Hypo-Thyroid")
     st.write("Enter the following details to predict hypo-thyroid disease:")
 
     age = display_input('Age', 'Enter age of the person', 'age', 'number')
