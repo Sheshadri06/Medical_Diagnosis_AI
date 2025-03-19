@@ -3,12 +3,6 @@ numpy
 streamlit_option_menu
 scikit-learn 
 pandas  
-pickle  
-tensorflow  
-torch  
-transformers  
-matplotlib  
-seaborn  
 
  
 
